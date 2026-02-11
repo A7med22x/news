@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:news/app_theme.dart';
+import 'package:news/home_screen.dart';
 import 'package:news/l10n/app_localizations.dart';
 import 'package:news/providers/settings_provider.dart';
 import 'package:provider/provider.dart';
@@ -25,13 +26,14 @@ class NewsApp extends StatelessWidget {
 
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      routes: {},
+      routes: {HomeScreen.routeName: (_) => HomeScreen()},
+      initialRoute: HomeScreen.routeName,
       theme: AppTheme.lightTheme,
       darkTheme: AppTheme.darkTheme,
-      themeMode: settingspProvider.themeMode,
+      themeMode: .dark, // settingspProvider.themeMode,
       localizationsDelegates: AppLocalizations.localizationsDelegates,
       supportedLocales: AppLocalizations.supportedLocales,
-      locale: Locale(settingspProvider.languageCode),
+      locale: Locale('en'), //settingspProvider.languageCode),
     );
   }
 }

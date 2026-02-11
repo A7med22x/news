@@ -1,3 +1,21 @@
 {
-    "newsApp": "News App"
+    "newsApp": "News App",
+    "home": "Home",
+    "goToHome": "Go To Home",
+    "theme": "Theme",
+    "dark": "Dark",
+    "light": "Light",
+    "language": "Language",
+    "english": "English",
+    "arabic": "Arabic",
+    "general": "General",
+    "busniess": "Busniess",
+    "entertainment": "Entertainment",
+    "helth": "Helth",
+    "science": "Science",
+    "technology": "Technology",
+    "sport": "Sport",
+    "search": "Search",
+    "viewFullArticel": "View Full Articel",
+    "goodMorningHere": "Good Morning\nHere is Some News For You"
 }
