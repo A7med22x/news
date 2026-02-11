@@ -24,6 +24,7 @@ class AppTheme {
       titleLarge: TextStyle(fontSize: 24, fontWeight: .w500, color: white),
       titleMedium: TextStyle(fontSize: 20, fontWeight: .bold, color: white),
       titleSmall: TextStyle(fontSize: 16, fontWeight: .bold, color: white),
+      labelMedium: TextStyle(fontSize: 14, fontWeight: .w500, color: grey),
       labelSmall: TextStyle(fontSize: 12, fontWeight: .w500, color: grey),
     )
   );
