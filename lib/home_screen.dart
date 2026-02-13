@@ -2,11 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:news/app_theme.dart';
 import 'package:news/categories/categories_view.dart';
-import 'package:news/home_drawer.dart';
+import 'package:news/drawer/home_drawer.dart';
 import 'package:news/l10n/app_localizations.dart';
 import 'package:news/models/category_model.dart';
 import 'package:news/news/news_view.dart';
 import 'package:news/providers/settings_provider.dart';
+import 'package:news/search_screen.dart';
 import 'package:provider/provider.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -35,7 +36,12 @@ class _HomeScreenState extends State<HomeScreen> {
         actions: [
           IconButton(
             padding: EdgeInsets.symmetric(horizontal: 16),
-            onPressed: () {},
+            onPressed: () {
+              if (selectedCategory == null) return;
+              Navigator.of(
+                context,
+              ).pushNamed(SearchScreen.routeName, arguments: selectedCategory);
+            },
             icon: SvgPicture.asset(
               'assets/icons/search.svg',
               colorFilter: ColorFilter.mode(
