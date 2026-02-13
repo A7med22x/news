@@ -60,6 +60,9 @@ class AppLocalizationsEn extends AppLocalizations {
   String get search => 'Search';
 
   @override
+  String get viewAll => 'View All';
+
+  @override
   String get viewFullArticel => 'View Full Articel';
 
   @override

@@ -9,13 +9,14 @@
   "english": "الإنجليزية",
   "arabic": "العربية",
   "general": "عام",
-  "busniess": "أعمال",
-  "entertainment": "ترفيه",
-  "helth": "صحة",
-  "science": "علوم",
-  "technology": "تكنولوجيا",
-  "sport": "رياضة",
-  "search": "بحث",
+  "busniess": "الأعمال",
+  "entertainment": "الترفيه",
+  "helth": "الصحة",
+  "science": "العلوم",
+  "technology": "التكنولوجيا",
+  "sport": "الرياضة",
+  "search": "ابحث",
+  "viewAll": "عرض الكل",
   "viewFullArticel": "عرض المقال كاملًا",
-  "goodMorningHere": "صباح الخير\nإليك بعض الأخبار لك"
+  "goodMorningHere": "صباح الخير\nإليك بعض الأخبار "
 }

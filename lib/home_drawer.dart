@@ -153,7 +153,11 @@ class HomeDrawer extends StatelessWidget {
                   ),
                 ),
               ],
-              onChanged: (Value) {},
+              onChanged: (languageCode) {
+                if (languageCode == null) return;
+                settingsProvider.changeLanguage(languageCode);
+                Navigator.of(context).pop();
+              },
               borderRadius: BorderRadius.circular(16),
               dropdownColor: AppTheme.black,
               isExpanded: true,

@@ -1,3 +1,6 @@
+import 'package:flutter/material.dart';
+import 'package:news/l10n/app_localizations.dart';
+
 class CategoryModel {
   String id;
   String name;
@@ -9,13 +12,41 @@ class CategoryModel {
     required this.imageName,
   });
 
-  static List<CategoryModel> categories = [
-    CategoryModel(id: '', name: 'General', imageName: 'general'),
-    CategoryModel(id: '', name: 'Busniess', imageName: 'busniess'),
-    CategoryModel(id: '', name: 'Entertainment', imageName: 'entertainment'),
-    CategoryModel(id: '', name: 'Helth', imageName: 'helth'),
-    CategoryModel(id: '', name: 'Science', imageName: 'science'),
-    CategoryModel(id: '', name: 'Technology', imageName: 'technology'),
-    CategoryModel(id: '', name: 'Sport', imageName: 'sport'),
+  static List<CategoryModel> categories(BuildContext context) => [
+    CategoryModel(
+      id: '',
+      name: AppLocalizations.of(context)!.general,
+      imageName: 'general',
+    ),
+    CategoryModel(
+      id: '',
+      name: AppLocalizations.of(context)!.busniess,
+      imageName: 'busniess',
+    ),
+    CategoryModel(
+      id: '',
+      name: AppLocalizations.of(context)!.entertainment,
+      imageName: 'entertainment',
+    ),
+    CategoryModel(
+      id: '',
+      name: AppLocalizations.of(context)!.helth,
+      imageName: 'helth',
+    ),
+    CategoryModel(
+      id: '',
+      name: AppLocalizations.of(context)!.science,
+      imageName: 'science',
+    ),
+    CategoryModel(
+      id: '',
+      name: AppLocalizations.of(context)!.technology,
+      imageName: 'technology',
+    ),
+    CategoryModel(
+      id: '',
+      name: AppLocalizations.of(context)!.sport,
+      imageName: 'sport',
+    ),
   ];
 }

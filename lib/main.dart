@@ -33,7 +33,7 @@ class NewsApp extends StatelessWidget {
       themeMode: settingspProvider.themeMode,
       localizationsDelegates: AppLocalizations.localizationsDelegates,
       supportedLocales: AppLocalizations.supportedLocales,
-      locale: Locale('en'), //settingspProvider.languageCode),
+      locale: Locale(settingspProvider.languageCode),
     );
   }
 }

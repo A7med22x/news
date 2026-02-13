@@ -23,14 +23,14 @@ class CategoriesView extends StatelessWidget {
               padding: EdgeInsets.only(top: 16),
               itemBuilder: (_, index) => GestureDetector(
                 onTap: () {
-                  onCategorySelected(CategoryModel.categories[index]);
+                  onCategorySelected(CategoryModel.categories(context)[index]);
                 },
                 child: CategoryItem(
-                  category: CategoryModel.categories[index],
+                  category: CategoryModel.categories(context)[index],
                   index: index,
                 ),
               ),
-              itemCount: CategoryModel.categories.length,
+              itemCount: CategoryModel.categories(context).length,
               separatorBuilder: (_, _) => SizedBox(height: 16),
             ),
           ),

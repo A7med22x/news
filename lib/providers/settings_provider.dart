@@ -11,11 +11,11 @@ class SettingsProvider with ChangeNotifier {
 
   void loadLanguageAndTheme() async {
     SharedPreferences preferences = await SharedPreferences.getInstance();
-    
+
     bool isEnglishLanguage = preferences.getBool('isEnglishLanguage') ?? false;
     languageCode = isEnglishLanguage ? 'en' : 'ar';
 
-    bool isDarkTheme = preferences.getBool('isEnglishLanguage') ?? false;
+    bool isDarkTheme = preferences.getBool('isDarkTheme') ?? false;
     themeMode = isDarkTheme ? .dark : .light;
 
     notifyListeners();
