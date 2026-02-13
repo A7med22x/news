@@ -5,7 +5,24 @@ class AppTheme {
   static const Color white = Color(0xffFFFFFF);
   static const Color grey = Color(0xffA0A0A0);
 
-  static ThemeData lightTheme = ThemeData();
+  static ThemeData lightTheme = ThemeData(
+    scaffoldBackgroundColor: white,
+    appBarTheme: AppBarThemeData(
+      backgroundColor: white,
+      foregroundColor: black,
+      centerTitle: true,
+      titleTextStyle: TextStyle(fontSize: 20, fontWeight: .w500, color: black),
+    ),
+    dividerColor: black,
+    textTheme: TextTheme(
+      headlineSmall: TextStyle(fontSize: 28, fontWeight: .bold, color: white),
+      titleLarge: TextStyle(fontSize: 24, fontWeight: .w500, color: black),
+      titleMedium: TextStyle(fontSize: 20, fontWeight: .bold, color: black),
+      titleSmall: TextStyle(fontSize: 16, fontWeight: .bold, color: black),
+      labelMedium: TextStyle(fontSize: 14, fontWeight: .w500, color: grey),
+      labelSmall: TextStyle(fontSize: 12, fontWeight: .w500, color: grey),
+    ),
+  );
 
   static ThemeData darkTheme = ThemeData(
     scaffoldBackgroundColor: black,
@@ -15,6 +32,7 @@ class AppTheme {
       centerTitle: true,
       titleTextStyle: TextStyle(fontSize: 20, fontWeight: .w500, color: white),
     ),
+    dividerColor: white,
     textTheme: TextTheme(
       headlineSmall: TextStyle(fontSize: 28, fontWeight: .bold, color: black),
       titleLarge: TextStyle(fontSize: 24, fontWeight: .w500, color: white),

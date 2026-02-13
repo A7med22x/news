@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:news/app_theme.dart';
 import 'package:news/models/category_model.dart';
+import 'package:news/providers/settings_provider.dart';
+import 'package:provider/provider.dart';
 
 class CategoryItem extends StatelessWidget {
   CategoryModel category;
@@ -10,13 +12,14 @@ class CategoryItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    SettingsProvider settingsProvider = Provider.of<SettingsProvider>(context);
     Size screenSize = MediaQuery.sizeOf(context);
 
     return Container(
       width: .infinity,
       height: screenSize.height * 0.25,
       decoration: BoxDecoration(
-        color: AppTheme.white,
+        color: settingsProvider.isDark ? AppTheme.white : AppTheme.black,
         borderRadius: BorderRadius.circular(16),
       ),
       clipBehavior: .antiAlias,

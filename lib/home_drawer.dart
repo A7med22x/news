@@ -42,19 +42,27 @@ class HomeDrawer extends StatelessWidget {
                 children: [
                   SvgPicture.asset('assets/icons/home.svg'),
                   SizedBox(width: 12),
-                  Text(appLocalizations.goToHome, style: textTheme.titleLarge),
+                  Text(
+                    appLocalizations.goToHome,
+                    style: textTheme.titleLarge!.copyWith(
+                      color: AppTheme.white,
+                    ),
+                  ),
                 ],
               ),
             ),
           ),
-          Divider(color: AppTheme.white, indent: 16, endIndent: 16),
+          Divider(indent: 16, endIndent: 16),
           Padding(
             padding: EdgeInsets.all(16),
             child: Row(
               children: [
                 SvgPicture.asset('assets/icons/theme.svg'),
                 SizedBox(width: 12),
-                Text(appLocalizations.theme, style: textTheme.titleLarge),
+                Text(
+                  appLocalizations.theme,
+                  style: textTheme.titleLarge!.copyWith(color: AppTheme.white),
+                ),
               ],
             ),
           ),
@@ -73,18 +81,26 @@ class HomeDrawer extends StatelessWidget {
                   value: .dark,
                   child: Text(
                     appLocalizations.dark,
-                    style: textTheme.titleLarge,
+                    style: textTheme.titleLarge!.copyWith(
+                      color: AppTheme.white,
+                    ),
                   ),
                 ),
                 DropdownMenuItem(
                   value: .light,
                   child: Text(
                     appLocalizations.light,
-                    style: textTheme.titleLarge,
+                    style: textTheme.titleLarge!.copyWith(
+                      color: AppTheme.white,
+                    ),
                   ),
                 ),
               ],
-              onChanged: (Value) {},
+              onChanged: (themeMode) {
+                if (themeMode == null) return;
+                settingsProvider.changeTheme(themeMode);
+                Navigator.of(context).pop();
+              },
               borderRadius: BorderRadius.circular(16),
               dropdownColor: AppTheme.black,
               isExpanded: true,
@@ -93,14 +109,17 @@ class HomeDrawer extends StatelessWidget {
               iconSize: 32,
             ),
           ),
-          Divider(color: AppTheme.white, indent: 16, endIndent: 16),
+          Divider(indent: 16, endIndent: 16),
           Padding(
             padding: EdgeInsets.all(16),
             child: Row(
               children: [
                 SvgPicture.asset('assets/icons/language.svg'),
                 SizedBox(width: 12),
-                Text(appLocalizations.language, style: textTheme.titleLarge),
+                Text(
+                  appLocalizations.language,
+                  style: textTheme.titleLarge!.copyWith(color: AppTheme.white),
+                ),
               ],
             ),
           ),
@@ -119,14 +138,18 @@ class HomeDrawer extends StatelessWidget {
                   value: 'en',
                   child: Text(
                     appLocalizations.english,
-                    style: textTheme.titleLarge,
+                    style: textTheme.titleLarge!.copyWith(
+                      color: AppTheme.white,
+                    ),
                   ),
                 ),
                 DropdownMenuItem(
                   value: 'ar',
                   child: Text(
                     appLocalizations.arabic,
-                    style: textTheme.titleLarge,
+                    style: textTheme.titleLarge!.copyWith(
+                      color: AppTheme.white,
+                    ),
                   ),
                 ),
               ],

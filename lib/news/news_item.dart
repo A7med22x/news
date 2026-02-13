@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:news/app_theme.dart';
+import 'package:news/providers/settings_provider.dart';
+import 'package:provider/provider.dart';
 import 'package:timeago/timeago.dart' as timeago;
 
 class NewsItem extends StatelessWidget {
@@ -7,6 +9,7 @@ class NewsItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    SettingsProvider settingsProvider = Provider.of<SettingsProvider>(context);
     TextTheme textTheme = Theme.of(context).textTheme;
     DateTime dateTime = DateTime.now().subtract(Duration(hours: 20));
 
@@ -14,7 +17,9 @@ class NewsItem extends StatelessWidget {
       padding: EdgeInsets.all(8),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(16),
-        border: Border.all(color: AppTheme.white),
+        border: Border.all(
+          color: settingsProvider.isDark ? AppTheme.white : AppTheme.black,
+        ),
       ),
       clipBehavior: .antiAlias,
       child: Column(

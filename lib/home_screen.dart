@@ -6,6 +6,8 @@ import 'package:news/home_drawer.dart';
 import 'package:news/l10n/app_localizations.dart';
 import 'package:news/models/category_model.dart';
 import 'package:news/news/news_view.dart';
+import 'package:news/providers/settings_provider.dart';
+import 'package:provider/provider.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -21,6 +23,7 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     AppLocalizations appLocalizations = AppLocalizations.of(context)!;
+    SettingsProvider settingsProvider = Provider.of<SettingsProvider>(context);
 
     return Scaffold(
       appBar: AppBar(
@@ -35,7 +38,10 @@ class _HomeScreenState extends State<HomeScreen> {
             onPressed: () {},
             icon: SvgPicture.asset(
               'assets/icons/search.svg',
-              colorFilter: ColorFilter.mode(AppTheme.white, .srcIn),
+              colorFilter: ColorFilter.mode(
+                settingsProvider.isDark ? AppTheme.white : AppTheme.black,
+                .srcIn,
+              ),
             ),
           ),
         ],
