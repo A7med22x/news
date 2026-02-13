@@ -9,59 +9,59 @@ class AppLocalizationsAr extends AppLocalizations {
   AppLocalizationsAr([String locale = 'ar']) : super(locale);
 
   @override
-  String get newsApp => 'News App';
+  String get newsApp => 'تطبيق الأخبار';
 
   @override
-  String get home => 'Home';
+  String get home => 'الرئيسية';
 
   @override
-  String get goToHome => 'Go To Home';
+  String get goToHome => 'اذهب إلى الرئيسية';
 
   @override
-  String get theme => 'Theme';
+  String get theme => 'المظهر';
 
   @override
-  String get dark => 'Dark';
+  String get dark => 'داكن';
 
   @override
-  String get light => 'Light';
+  String get light => 'فاتح';
 
   @override
-  String get language => 'Language';
+  String get language => 'اللغة';
 
   @override
-  String get english => 'English';
+  String get english => 'الإنجليزية';
 
   @override
-  String get arabic => 'Arabic';
+  String get arabic => 'العربية';
 
   @override
-  String get general => 'General';
+  String get general => 'عام';
 
   @override
-  String get busniess => 'Busniess';
+  String get busniess => 'أعمال';
 
   @override
-  String get entertainment => 'Entertainment';
+  String get entertainment => 'ترفيه';
 
   @override
-  String get helth => 'Helth';
+  String get helth => 'صحة';
 
   @override
-  String get science => 'Science';
+  String get science => 'علوم';
 
   @override
-  String get technology => 'Technology';
+  String get technology => 'تكنولوجيا';
 
   @override
-  String get sport => 'Sport';
+  String get sport => 'رياضة';
 
   @override
-  String get search => 'Search';
+  String get search => 'بحث';
 
   @override
-  String get viewFullArticel => 'View Full Articel';
+  String get viewFullArticel => 'عرض المقال كاملًا';
 
   @override
-  String get goodMorningHere => 'Good Morning\nHere is Some News For You';
+  String get goodMorningHere => 'صباح الخير\nإليك بعض الأخبار لك';
 }

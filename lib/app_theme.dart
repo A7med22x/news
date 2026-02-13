@@ -13,11 +13,7 @@ class AppTheme {
       backgroundColor: black,
       foregroundColor: white,
       centerTitle: true,
-      titleTextStyle: TextStyle(
-        fontSize: 20,
-        fontWeight: .w500,
-        color: white
-      )
+      titleTextStyle: TextStyle(fontSize: 20, fontWeight: .w500, color: white),
     ),
     textTheme: TextTheme(
       headlineSmall: TextStyle(fontSize: 28, fontWeight: .bold, color: black),
@@ -26,6 +22,6 @@ class AppTheme {
       titleSmall: TextStyle(fontSize: 16, fontWeight: .bold, color: white),
       labelMedium: TextStyle(fontSize: 14, fontWeight: .w500, color: grey),
       labelSmall: TextStyle(fontSize: 12, fontWeight: .w500, color: grey),
-    )
+    ),
   );
 }

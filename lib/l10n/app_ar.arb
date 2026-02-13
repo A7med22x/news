@@ -1,3 +1,21 @@
 {
-    
+  "newsApp": "تطبيق الأخبار",
+  "home": "الرئيسية",
+  "goToHome": "اذهب إلى الرئيسية",
+  "theme": "المظهر",
+  "dark": "داكن",
+  "light": "فاتح",
+  "language": "اللغة",
+  "english": "الإنجليزية",
+  "arabic": "العربية",
+  "general": "عام",
+  "busniess": "أعمال",
+  "entertainment": "ترفيه",
+  "helth": "صحة",
+  "science": "علوم",
+  "technology": "تكنولوجيا",
+  "sport": "رياضة",
+  "search": "بحث",
+  "viewFullArticel": "عرض المقال كاملًا",
+  "goodMorningHere": "صباح الخير\nإليك بعض الأخبار لك"
 }
