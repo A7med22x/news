@@ -10,6 +10,7 @@ import 'package:news/providers/settings_provider.dart';
 import 'package:news/widgets/custom_home_bottom_sheet.dart';
 import 'package:news/widgets/load_indicator.dart';
 import 'package:news/widgets/error_indicator.dart';
+import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
 import 'package:provider/provider.dart';
 
 class NewsView extends StatefulWidget {
@@ -23,9 +24,36 @@ class NewsView extends StatefulWidget {
 
 class _NewsViewState extends State<NewsView> {
   int currentIndex = 0;
+  static const pageSize = 20;
+  PagingController<int, News>? pagingController;
   late Future<SourcesResponse> getSourcesFuture = ApiService.getSources(
     widget.categoryId,
   );
+  List<Source> sources = [];
+
+  @override
+  void initState() {
+    pagingController = PagingController(
+            getNextPageKey: (state) =>
+                state.lastPageIsEmpty ? null : state.nextIntPageKey,
+            fetchPage: (pageKey) async {
+              if (sources.isEmpty) return [];
+              final response = await ApiService.getNews(
+                sourceId: sources[currentIndex].id!,
+                page: pageKey,
+                pageSize: pageSize,
+              );
+              return response.news ?? [];
+            },
+          );
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    pagingController?.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -39,7 +67,8 @@ class _NewsViewState extends State<NewsView> {
         } else if (snapshot.hasError || snapshot.data?.status != 'ok') {
           return ErrorIndicator();
         } else {
-          List<Source> sources = snapshot.data?.sources ?? [];
+          sources = snapshot.data?.sources ?? [];
+
           return Column(
             children: [
               DefaultTabController(
@@ -68,27 +97,20 @@ class _NewsViewState extends State<NewsView> {
                 ),
               ),
               Expanded(
-                child: FutureBuilder(
-                  future: ApiService.getNews(sources[currentIndex].id!),
-                  builder: (context, snapshot) {
-                    if (snapshot.connectionState == .waiting) {
-                      return LoadIndicator();
-                    } else if (snapshot.hasError ||
-                        snapshot.data?.status != 'ok') {
-                      return ErrorIndicator();
-                    } else {
-                      List<News> news = snapshot.data?.news ?? [];
-                      return ListView.separated(
-                        padding: EdgeInsets.only(top: 16, left: 16, right: 16),
-                        itemBuilder: (_, index) =>
-                            InkWell(onTap: () {
-                              showBotomSheet(news[index]);
-                            }, child: NewsItem(news[index])),
-                        separatorBuilder: (_, _) => SizedBox(height: 16),
-                        itemCount: news.length,
-                      );
-                    }
-                  },
+                child: PagingListener<int, News>(
+                  controller: pagingController!,
+                  builder: (context, state, fetchNextPage) => PagedListView(
+                    state: state,
+                    fetchNextPage: fetchNextPage,
+                    builderDelegate: PagedChildBuilderDelegate<News>(
+                      itemBuilder: (context, news, index) => InkWell(
+                        onTap: () {
+                          showBotomSheet(news);
+                        },
+                        child: NewsItem(news),
+                      ),
+                    ),
+                  ),
                 ),
               ),
             ],
