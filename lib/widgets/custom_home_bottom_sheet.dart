@@ -4,6 +4,7 @@ import 'package:news/l10n/app_localizations.dart';
 import 'package:news/models/news_response/news.dart';
 import 'package:news/providers/settings_provider.dart';
 import 'package:provider/provider.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class CustomHomeBottomSheet extends StatelessWidget {
   News news;
@@ -49,7 +50,9 @@ class CustomHomeBottomSheet extends StatelessWidget {
           SizedBox(
             width: .infinity,
             child: ElevatedButton(
-              onPressed: () {},
+              onPressed: () {
+                launchInBrowser(news.url!);
+              },
               child: Text(AppLocalizations.of(context)!.viewFullArticel),
             ),
           ),
@@ -57,4 +60,16 @@ class CustomHomeBottomSheet extends StatelessWidget {
       ),
     );
   }
+
+  Future<void> launchInBrowser(String url) async {
+  final Uri uri = Uri.parse(url);
+
+  if (!await launchUrl(
+    uri,
+    mode: LaunchMode.externalApplication,
+  )) {
+    throw Exception('Could not launch $url');
+  }
+}
+
 }
