@@ -7,6 +7,7 @@ import 'package:news/models/sources_response/sources_response.dart';
 import 'package:news/news/news_item.dart';
 import 'package:news/news/tab_item.dart';
 import 'package:news/providers/settings_provider.dart';
+import 'package:news/widgets/custom_home_bottom_sheet.dart';
 import 'package:news/widgets/load_indicator.dart';
 import 'package:news/widgets/error_indicator.dart';
 import 'package:provider/provider.dart';
@@ -79,7 +80,10 @@ class _NewsViewState extends State<NewsView> {
                       List<News> news = snapshot.data?.news ?? [];
                       return ListView.separated(
                         padding: EdgeInsets.only(top: 16, left: 16, right: 16),
-                        itemBuilder: (_, index) => NewsItem(news[index]),
+                        itemBuilder: (_, index) =>
+                            InkWell(onTap: () {
+                              showBotomSheet(news[index]);
+                            }, child: NewsItem(news[index])),
                         separatorBuilder: (_, _) => SizedBox(height: 16),
                         itemCount: news.length,
                       );
@@ -91,6 +95,14 @@ class _NewsViewState extends State<NewsView> {
           );
         }
       },
+    );
+  }
+
+  void showBotomSheet(News news) async {
+    await showModalBottomSheet(
+      context: context,
+      backgroundColor: Colors.transparent,
+      builder: (_) => CustomHomeBottomSheet(news),
     );
   }
 }

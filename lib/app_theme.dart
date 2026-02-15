@@ -29,6 +29,13 @@ class AppTheme {
         borderSide: BorderSide(color: black),
       ),
     ),
+    elevatedButtonTheme: ElevatedButtonThemeData(
+      style: ElevatedButton.styleFrom(
+        backgroundColor: white,
+        foregroundColor: black,
+        textStyle: TextStyle(fontSize: 16, fontWeight: .bold, color: black),
+      ),
+    ),
     textTheme: TextTheme(
       headlineSmall: TextStyle(fontSize: 28, fontWeight: .bold, color: white),
       titleLarge: TextStyle(fontSize: 24, fontWeight: .w500, color: black),
@@ -61,6 +68,13 @@ class AppTheme {
       focusedBorder: OutlineInputBorder(
         borderRadius: BorderRadius.circular(16),
         borderSide: BorderSide(color: white),
+      ),
+    ),
+    elevatedButtonTheme: ElevatedButtonThemeData(
+      style: ElevatedButton.styleFrom(
+        backgroundColor: black,
+        foregroundColor: white,
+        textStyle: TextStyle(fontSize: 16, fontWeight: .bold, color: white),
       ),
     ),
     textTheme: TextTheme(
