@@ -212,6 +212,12 @@ abstract class AppLocalizations {
   /// **'View Full Articel'**
   String get viewFullArticel;
 
+  /// No description provided for @somethingWentWrong.
+  ///
+  /// In en, this message translates to:
+  /// **'Something Went Wrong'**
+  String get somethingWentWrong;
+
   /// No description provided for @goodMorningHere.
   ///
   /// In en, this message translates to:

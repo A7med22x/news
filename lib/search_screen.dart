@@ -63,14 +63,14 @@ class _SearchScreenState extends State<SearchScreen> {
               onTapOutside: (_) =>
                   FocusManager.instance.primaryFocus?.unfocus(),
             ),
-            Expanded(
-              child: ListView.separated(
-                padding: EdgeInsets.only(top: 16),
-                itemBuilder: (_, index) => NewsItem(),
-                separatorBuilder: (_, _) => SizedBox(height: 16),
-                itemCount: 10,
-              ),
-            ),
+            // Expanded(
+            //   child: ListView.separated(
+            //     padding: EdgeInsets.only(top: 16),
+            //     itemBuilder: (_, index) => NewsItem(),
+            //     separatorBuilder: (_, _) => SizedBox(height: 16),
+            //     itemCount: 10,
+            //   ),
+            // ),
           ],
         ),
       ),

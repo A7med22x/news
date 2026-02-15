@@ -66,5 +66,8 @@ class AppLocalizationsAr extends AppLocalizations {
   String get viewFullArticel => 'عرض المقال كاملًا';
 
   @override
+  String get somethingWentWrong => 'حدث خطأ ما';
+
+  @override
   String get goodMorningHere => 'صباح الخير\nإليك بعض الأخبار ';
 }

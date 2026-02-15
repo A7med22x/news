@@ -66,5 +66,8 @@ class AppLocalizationsEn extends AppLocalizations {
   String get viewFullArticel => 'View Full Articel';
 
   @override
+  String get somethingWentWrong => 'Something Went Wrong';
+
+  @override
   String get goodMorningHere => 'Good Morning\nHere is Some News For You';
 }

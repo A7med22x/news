@@ -40,7 +40,7 @@ class HomeDrawer extends StatelessWidget {
               },
               child: Row(
                 children: [
-                  SvgPicture.asset('assets/icons/home.svg'),
+                  SvgPicture.asset('assets/icons/Home.svg'),
                   SizedBox(width: 12),
                   Text(
                     appLocalizations.goToHome,

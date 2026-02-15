@@ -14,37 +14,37 @@ class CategoryModel {
 
   static List<CategoryModel> categories(BuildContext context) => [
     CategoryModel(
-      id: '',
+      id: 'general',
       name: AppLocalizations.of(context)!.general,
       imageName: 'general',
     ),
     CategoryModel(
-      id: '',
+      id: 'business',
       name: AppLocalizations.of(context)!.busniess,
       imageName: 'busniess',
     ),
     CategoryModel(
-      id: '',
+      id: 'entertainment',
       name: AppLocalizations.of(context)!.entertainment,
       imageName: 'entertainment',
     ),
     CategoryModel(
-      id: '',
+      id: 'health',
       name: AppLocalizations.of(context)!.helth,
       imageName: 'helth',
     ),
     CategoryModel(
-      id: '',
+      id: 'science',
       name: AppLocalizations.of(context)!.science,
       imageName: 'science',
     ),
     CategoryModel(
-      id: '',
+      id: 'technology',
       name: AppLocalizations.of(context)!.technology,
       imageName: 'technology',
     ),
     CategoryModel(
-      id: '',
+      id: 'sports',
       name: AppLocalizations.of(context)!.sport,
       imageName: 'sport',
     ),
