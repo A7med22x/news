@@ -19,5 +19,7 @@
     "viewAll": "View All",
     "viewFullArticel": "View Full Articel",
     "somethingWentWrong": "Something Went Wrong",
+    "typeWordToSearch": "Type a word to search",
+    "noResult": "No Results",
     "goodMorningHere": "Good Morning\nHere is Some News For You"
 }

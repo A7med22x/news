@@ -218,6 +218,18 @@ abstract class AppLocalizations {
   /// **'Something Went Wrong'**
   String get somethingWentWrong;
 
+  /// No description provided for @typeWordToSearch.
+  ///
+  /// In en, this message translates to:
+  /// **'Type a word to search'**
+  String get typeWordToSearch;
+
+  /// No description provided for @noResult.
+  ///
+  /// In en, this message translates to:
+  /// **'No Results'**
+  String get noResult;
+
   /// No description provided for @goodMorningHere.
   ///
   /// In en, this message translates to:

@@ -5,7 +5,6 @@ import 'package:news/categories/categories_view.dart';
 import 'package:news/drawer/home_drawer.dart';
 import 'package:news/l10n/app_localizations.dart';
 import 'package:news/models/category_model.dart';
-import 'package:news/widgets/custom_home_bottom_sheet.dart';
 import 'package:news/news/news_view.dart';
 import 'package:news/providers/settings_provider.dart';
 import 'package:news/search_screen.dart';
@@ -54,9 +53,9 @@ class _HomeScreenState extends State<HomeScreen> {
         ],
       ),
       drawer: HomeDrawer(onGoToHomeCliced: resetSelectedCategory),
-            body: selectedCategory == null
+      body: selectedCategory == null
           ? CategoriesView(onCategorySelected: onCategorySelected)
-          : NewsView(categoryId: selectedCategory!.id,),
+          : NewsView(categoryId: selectedCategory!.id),
     );
   }
 

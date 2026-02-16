@@ -31,8 +31,8 @@ class CustomHomeBottomSheet extends StatelessWidget {
             child: ClipRRect(
               borderRadius: BorderRadius.circular(8),
               child: Image.network(
-              news.urlToImage ??
-                  'https://thumb.ac-illust.com/8e/8e4070719d51bf84413a3c6019356f91_t.jpeg',
+                news.urlToImage ??
+                    'https://thumb.ac-illust.com/8e/8e4070719d51bf84413a3c6019356f91_t.jpeg',
                 height: .infinity,
                 width: .infinity,
                 fit: .fill,
@@ -62,14 +62,10 @@ class CustomHomeBottomSheet extends StatelessWidget {
   }
 
   Future<void> launchInBrowser(String url) async {
-  final Uri uri = Uri.parse(url);
+    final Uri uri = Uri.parse(url);
 
-  if (!await launchUrl(
-    uri,
-    mode: LaunchMode.externalApplication,
-  )) {
-    throw Exception('Could not launch $url');
+    if (!await launchUrl(uri, mode: LaunchMode.externalApplication)) {
+      throw Exception('Could not launch $url');
+    }
   }
-}
-
 }

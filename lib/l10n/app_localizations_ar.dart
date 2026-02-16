@@ -69,5 +69,11 @@ class AppLocalizationsAr extends AppLocalizations {
   String get somethingWentWrong => 'حدث خطأ ما';
 
   @override
+  String get typeWordToSearch => 'اكتب كلمة للبحث';
+
+  @override
+  String get noResult => 'لا توجد نتائج';
+
+  @override
   String get goodMorningHere => 'صباح الخير\nإليك بعض الأخبار ';
 }

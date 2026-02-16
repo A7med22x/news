@@ -19,5 +19,7 @@
   "viewAll": "عرض الكل",
   "viewFullArticel": "عرض المقال كاملًا",
   "somethingWentWrong": "حدث خطأ ما",
+  "typeWordToSearch": "اكتب كلمة للبحث", 
+  "noResult": "لا توجد نتائج",
   "goodMorningHere": "صباح الخير\nإليك بعض الأخبار "
 }

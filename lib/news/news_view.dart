@@ -34,18 +34,18 @@ class _NewsViewState extends State<NewsView> {
   @override
   void initState() {
     pagingController = PagingController(
-            getNextPageKey: (state) =>
-                state.lastPageIsEmpty ? null : state.nextIntPageKey,
-            fetchPage: (pageKey) async {
-              if (sources.isEmpty) return [];
-              final response = await ApiService.getNews(
-                sourceId: sources[currentIndex].id!,
-                page: pageKey,
-                pageSize: pageSize,
-              );
-              return response.news ?? [];
-            },
-          );
+      getNextPageKey: (state) =>
+          state.lastPageIsEmpty ? null : state.nextIntPageKey,
+      fetchPage: (pageKey) async {
+        if (sources.isEmpty) return [];
+        final response = await ApiService.getNews(
+          sourceId: sources[currentIndex].id!,
+          page: pageKey,
+          pageSize: pageSize,
+        );
+        return response.news ?? [];
+      },
+    );
     super.initState();
   }
 

@@ -69,5 +69,11 @@ class AppLocalizationsEn extends AppLocalizations {
   String get somethingWentWrong => 'Something Went Wrong';
 
   @override
+  String get typeWordToSearch => 'Type a word to search';
+
+  @override
+  String get noResult => 'No Results';
+
+  @override
   String get goodMorningHere => 'Good Morning\nHere is Some News For You';
 }
