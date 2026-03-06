@@ -6,6 +6,7 @@ import 'package:news/news/data/models/news.dart';
 import 'package:news/news/view/widgets/news_item.dart';
 import 'package:news/news/view_model/news_view_model.dart';
 import 'package:news/shared/providers/settings_provider.dart';
+import 'package:news/shared/service_locator.dart';
 import 'package:news/shared/widgets/custom_home_bottom_sheet.dart';
 import 'package:news/shared/widgets/error_indicator.dart';
 import 'package:news/shared/widgets/load_indicator.dart';
@@ -20,7 +21,7 @@ class SearchScreen extends StatefulWidget {
 }
 
 class _SearchScreenState extends State<SearchScreen> {
-  NewsViewModel newsViewModel = NewsViewModel();
+  NewsViewModel newsViewModel = ServiceLocator.newsViewModel;
   List<News> newsSearch = [];
   final searchController = TextEditingController();
 

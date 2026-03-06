@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:news/shared/app_theme.dart';
 import 'package:news/news/data/models/news.dart';
 import 'package:news/news/view_model/news_view_model.dart';
+import 'package:news/shared/service_locator.dart';
 import 'package:news/sourses/data/models/source.dart';
 import 'package:news/news/view/widgets/news_item.dart';
 import 'package:news/sourses/view/widgets/tab_item.dart';
@@ -23,8 +24,8 @@ class NewsView extends StatefulWidget {
 }
 
 class _NewsViewState extends State<NewsView> {
-  SourcesViewModel sourcesViewModel = SourcesViewModel();
-  NewsViewModel newsNewsViewModel = NewsViewModel();
+  SourcesViewModel sourcesViewModel = ServiceLocator.sourcesViewModel;
+  NewsViewModel newsNewsViewModel = ServiceLocator.newsViewModel;
   int currentIndex = 0;
   static const pageSize = 20;
   PagingController<int, News>? pagingController;

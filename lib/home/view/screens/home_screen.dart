@@ -7,7 +7,7 @@ import 'package:news/l10n/app_localizations.dart';
 import 'package:news/categories/data/models/category_model.dart';
 import 'package:news/news/view/widgets/news_view.dart';
 import 'package:news/shared/providers/settings_provider.dart';
-import 'package:news/search/view/screens/search_screen.dart';
+import 'package:news/news/view/screens/search_screen.dart';
 import 'package:provider/provider.dart';
 
 class HomeScreen extends StatefulWidget {
