@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:news/app_theme.dart';
-import 'package:news/categories/categories_view.dart';
-import 'package:news/drawer/home_drawer.dart';
+import 'package:news/shared/app_theme.dart';
+import 'package:news/categories/view/widgets/categories_view.dart';
+import 'package:news/home/view/widgets/home_drawer.dart';
 import 'package:news/l10n/app_localizations.dart';
-import 'package:news/models/category_model.dart';
-import 'package:news/news/news_view.dart';
-import 'package:news/providers/settings_provider.dart';
-import 'package:news/search_screen.dart';
+import 'package:news/categories/data/models/category_model.dart';
+import 'package:news/news/view/widgets/news_view.dart';
+import 'package:news/shared/providers/settings_provider.dart';
+import 'package:news/search/view/screens/search_screen.dart';
 import 'package:provider/provider.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -37,7 +37,6 @@ class _HomeScreenState extends State<HomeScreen> {
           IconButton(
             padding: EdgeInsets.symmetric(horizontal: 16),
             onPressed: () {
-              if (selectedCategory == null) return;
               Navigator.of(
                 context,
               ).pushNamed(SearchScreen.routeName, arguments: selectedCategory);
