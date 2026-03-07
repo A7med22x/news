@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:news/news/view_model/news_states.dart';
 import 'package:news/shared/app_theme.dart';
 import 'package:news/l10n/app_localizations.dart';
 import 'package:news/news/data/models/news.dart';
@@ -10,6 +11,7 @@ import 'package:news/shared/service_locator.dart';
 import 'package:news/shared/widgets/custom_home_bottom_sheet.dart';
 import 'package:news/shared/widgets/error_indicator.dart';
 import 'package:news/shared/widgets/load_indicator.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:provider/provider.dart';
 
 class SearchScreen extends StatefulWidget {
@@ -31,14 +33,14 @@ class _SearchScreenState extends State<SearchScreen> {
     final settingsProvider = Provider.of<SettingsProvider>(context);
     final textTheme = Theme.of(context).textTheme;
 
-    return ChangeNotifierProvider(
+    return BlocProvider(
       create: (_) => newsViewModel,
       child: Scaffold(
         appBar: AppBar(title: Text(appLocalizations.search)),
         body: Padding(
           padding: EdgeInsets.symmetric(horizontal: 16),
-          child: Consumer<NewsViewModel>(
-            builder: (_, viewModel, _) {
+          child: BlocBuilder<NewsViewModel, NewsState>(
+            builder: (_, state) {
               return Column(
                 children: [
                   TextFormField(
@@ -90,14 +92,14 @@ class _SearchScreenState extends State<SearchScreen> {
                               style: textTheme.titleLarge,
                             ),
                           )
-                        : Consumer<NewsViewModel>(
-                            builder: (_, viewModel, _) {
-                              if (viewModel.isLoading) {
+                        : BlocBuilder<NewsViewModel, NewsState>(
+                            builder: (_, state) {
+                              if (state is GetNewsLoading) {
                                 return LoadIndicator();
-                              } else if (viewModel.errorMessage != null) {
-                                return ErrorIndicator(viewModel.errorMessage!);
-                              } else {
-                                newsSearch = viewModel.searchNews;
+                              } else if (state is GetNewsError) {
+                                return ErrorIndicator(state.errorMessage);
+                              } else if (state is GetNewsSuccess) {
+                                newsSearch = state.news;
                                 if (newsSearch.isEmpty) {
                                   return Center(
                                     child: Text(
@@ -119,6 +121,8 @@ class _SearchScreenState extends State<SearchScreen> {
                                     itemCount: newsSearch.length,
                                   );
                                 }
+                              } else {
+                                return SizedBox();
                               }
                             },
                           ),

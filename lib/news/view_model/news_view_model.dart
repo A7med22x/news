@@ -1,38 +1,38 @@
-import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:news/news/data/models/news.dart';
 import 'package:news/news/data/repostories/news_repostory.dart';
+import 'package:news/news/view_model/news_states.dart';
 
-class NewsViewModel with ChangeNotifier {
+class NewsViewModel extends Cubit<NewsState> {
   NewsRepostory repostory;
 
-  NewsViewModel(this.repostory);
+  NewsViewModel(this.repostory) : super(NewsInitial());
 
   List<News> news = [];
-  List<News> searchNews = [];
-  String? errorMessage;
-  bool isLoading = false;
 
   Future<void> getNews(String sourceId, int page, int pageSize) async {
-    isLoading = true;
+    emit(GetNewsLoading());
     try {
-      news = await repostory.getNews(sourceId, page, pageSize);
+      if (page == 1) {
+        emit(GetNewsLoading());
+        news.clear();
+      }
+
+      final response = await repostory.getNews(sourceId, page, pageSize);
+      news.addAll(response);
+      emit(GetNewsSuccess(news));
     } catch (error) {
-      errorMessage = error.toString();
+      emit(GetNewsError(error.toString()));
     }
-    isLoading = false;
-    notifyListeners();
   }
 
   Future<void> getSearchNews(String query) async {
-    errorMessage = null;
-    searchNews = [];
-    isLoading = true;
+    emit(GetNewsLoading());
     try {
-      searchNews = await repostory.getSearchNews(query);
+      List<News> searchNews = await repostory.getSearchNews(query);
+      emit(GetNewsSuccess(searchNews));
     } catch (error) {
-      errorMessage = error.toString();
+      emit(GetNewsError(error.toString()));
     }
-    isLoading = false;
-    notifyListeners();
   }
 }

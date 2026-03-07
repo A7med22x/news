@@ -7,11 +7,13 @@ import 'package:news/sourses/data/models/source.dart';
 import 'package:news/news/view/widgets/news_item.dart';
 import 'package:news/sourses/view/widgets/tab_item.dart';
 import 'package:news/shared/providers/settings_provider.dart';
+import 'package:news/sourses/view_model/sources_states.dart';
 import 'package:news/sourses/view_model/sources_view_model.dart';
 import 'package:news/shared/widgets/custom_home_bottom_sheet.dart';
 import 'package:news/shared/widgets/load_indicator.dart';
 import 'package:news/shared/widgets/error_indicator.dart';
 import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:provider/provider.dart';
 
 class NewsView extends StatefulWidget {
@@ -25,22 +27,21 @@ class NewsView extends StatefulWidget {
 
 class _NewsViewState extends State<NewsView> {
   SourcesViewModel sourcesViewModel = ServiceLocator.sourcesViewModel;
-  NewsViewModel newsNewsViewModel = ServiceLocator.newsViewModel;
+  NewsViewModel newsViewModel = ServiceLocator.newsViewModel;
   int currentIndex = 0;
   static const pageSize = 20;
-  PagingController<int, News>? pagingController;
-
+  late PagingController<int, News> pagingController;
   List<Source> sources = [];
 
   @override
   void initState() {
-    sourcesViewModel.getSources(widget.categoryId);
     super.initState();
+    sourcesViewModel.getSources(widget.categoryId);
   }
 
   @override
   void dispose() {
-    pagingController?.dispose();
+    pagingController.dispose();
     super.dispose();
   }
 
@@ -48,27 +49,30 @@ class _NewsViewState extends State<NewsView> {
   Widget build(BuildContext context) {
     SettingsProvider settingsProvider = Provider.of<SettingsProvider>(context);
 
-    return ChangeNotifierProvider(
-      create: (_) => sourcesViewModel,
-      child: Consumer<SourcesViewModel>(
-        builder: (_, viewModel, _) {
-          if (viewModel.isLoading) {
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider(create: (_) => sourcesViewModel),
+        BlocProvider(create: (_) => newsViewModel),
+      ],
+      child: BlocBuilder<SourcesViewModel, SourcesState>(
+        builder: (_, state) {
+          if (state is GetSourcesLoading) {
             return LoadIndicator();
-          } else if (viewModel.errorMessage != null) {
-            return ErrorIndicator(viewModel.errorMessage!);
-          } else {
-            sources = viewModel.sources;
+          } else if (state is GetSourcesError) {
+            return ErrorIndicator(state.errorMessage);
+          } else if (state is GetSourcesSuccess) {
+            sources = state.sources;
             pagingController = PagingController(
               getNextPageKey: (state) =>
                   state.lastPageIsEmpty ? null : state.nextIntPageKey,
               fetchPage: (pageKey) async {
                 if (sources.isEmpty) return [];
-                await newsNewsViewModel.getNews(
+                await newsViewModel.getNews(
                   sources[currentIndex].id!,
                   pageKey,
                   pageSize,
                 );
-                return newsNewsViewModel.news;
+                return newsViewModel.news;
               },
             );
 
@@ -101,7 +105,7 @@ class _NewsViewState extends State<NewsView> {
                 ),
                 Expanded(
                   child: PagingListener<int, News>(
-                    controller: pagingController!,
+                    controller: pagingController,
                     builder: (context, state, fetchNextPage) => PagedListView(
                       state: state,
                       fetchNextPage: fetchNextPage,
@@ -121,6 +125,8 @@ class _NewsViewState extends State<NewsView> {
                 ),
               ],
             );
+          } else {
+            return SizedBox();
           }
         },
       ),
