@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:news/sourses/data/models/source.dart';
 
 class TabItem extends StatelessWidget {
-  Source source;
-  bool isSelected;
+  final Source source;
+  final bool isSelected;
 
-  TabItem({required this.source, required this.isSelected});
+  const TabItem({super.key, required this.source, required this.isSelected});
 
   @override
   Widget build(BuildContext context) {

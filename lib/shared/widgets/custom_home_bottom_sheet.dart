@@ -7,9 +7,9 @@ import 'package:provider/provider.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class CustomHomeBottomSheet extends StatelessWidget {
-  News news;
+  final News news;
 
-  CustomHomeBottomSheet(this.news);
+  const CustomHomeBottomSheet(this.news, {super.key});
 
   @override
   Widget build(BuildContext context) {

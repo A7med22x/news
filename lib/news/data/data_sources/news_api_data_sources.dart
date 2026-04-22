@@ -10,11 +10,12 @@ class NewsApiDataSources implements NewsDataSources {
   Future<List<News>> getNews({
     required String sourceId,
     required int page,
-    required int pageSize,
   }) async {
     Uri uri = Uri.https(ApiConstansts.baseUrl, ApiConstansts.newsEndpoint, {
       'apiKey': ApiConstansts.apiKey,
       'sources': sourceId,
+      'pageSize': '20',
+      'page': page.toString(),
     });
     http.Response response = await http.get(uri);
     Map<String, dynamic> json = jsonDecode(response.body);
@@ -27,10 +28,15 @@ class NewsApiDataSources implements NewsDataSources {
   }
 
   @override
-  Future<List<News>> getSerachNews(String query) async {
+  Future<List<News>> getSerachNews({
+    String query = '',
+    required int page,
+  }) async {
     Uri uri = Uri.https(ApiConstansts.baseUrl, ApiConstansts.searchEndpoint, {
       'apiKey': ApiConstansts.apiKey,
       'q': query,
+      'page': page.toString(),
+      'pageSize': '20',
     });
     http.Response response = await http.get(uri);
     Map<String, dynamic> json = jsonDecode(response.body);

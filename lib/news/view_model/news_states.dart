@@ -1,4 +1,3 @@
-import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
 import 'package:news/news/data/models/news.dart';
 
 abstract class NewsState {}

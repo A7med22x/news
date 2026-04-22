@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
 import 'package:news/news/view_model/news_states.dart';
 import 'package:news/shared/app_theme.dart';
 import 'package:news/l10n/app_localizations.dart';
@@ -8,9 +9,6 @@ import 'package:news/news/view/widgets/news_item.dart';
 import 'package:news/news/view_model/news_view_model.dart';
 import 'package:news/shared/providers/settings_provider.dart';
 import 'package:news/shared/service_locator.dart';
-import 'package:news/shared/widgets/custom_home_bottom_sheet.dart';
-import 'package:news/shared/widgets/error_indicator.dart';
-import 'package:news/shared/widgets/load_indicator.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:provider/provider.dart';
 
@@ -26,6 +24,27 @@ class _SearchScreenState extends State<SearchScreen> {
   NewsViewModel newsViewModel = ServiceLocator.newsViewModel;
   List<News> newsSearch = [];
   final searchController = TextEditingController();
+  late PagingController<int, News> pagingController;
+
+  @override
+  void initState() {
+    pagingController = PagingController(
+      getNextPageKey: (state) =>
+          state.lastPageIsEmpty ? null : state.nextIntPageKey,
+      fetchPage: (pageKey) async {
+        await newsViewModel.getSearchNews(searchController.text, page: pageKey);
+        return newsViewModel.searchNews;
+      },
+    );
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    searchController.dispose();
+    pagingController.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -50,16 +69,21 @@ class _SearchScreenState extends State<SearchScreen> {
                     ).textTheme.titleSmall!.copyWith(decoration: .none),
                     decoration: InputDecoration(
                       hintText: appLocalizations.search,
-                      prefixIcon: SvgPicture.asset(
-                        'assets/icons/search.svg',
-                        width: 24,
-                        height: 24,
-                        fit: .scaleDown,
-                        colorFilter: ColorFilter.mode(
-                          settingsProvider.isDark
-                              ? AppTheme.white
-                              : AppTheme.black,
-                          .srcIn,
+                      prefixIcon: InkWell(
+                        onTap: () {
+                          onChangedInputFiled(searchController.text);
+                        },
+                        child: SvgPicture.asset(
+                          'assets/icons/search.svg',
+                          width: 24,
+                          height: 24,
+                          fit: .scaleDown,
+                          colorFilter: ColorFilter.mode(
+                            settingsProvider.isDark
+                                ? AppTheme.white
+                                : AppTheme.black,
+                            .srcIn,
+                          ),
                         ),
                       ),
                       suffixIcon: IconButton(
@@ -78,7 +102,7 @@ class _SearchScreenState extends State<SearchScreen> {
                         ),
                       ),
                     ),
-                    onChanged: (value) {
+                    onFieldSubmitted: (value) {
                       onChangedInputFiled(value);
                     },
                     onTapOutside: (_) =>
@@ -92,39 +116,21 @@ class _SearchScreenState extends State<SearchScreen> {
                               style: textTheme.titleLarge,
                             ),
                           )
-                        : BlocBuilder<NewsViewModel, NewsState>(
-                            builder: (_, state) {
-                              if (state is GetNewsLoading) {
-                                return LoadIndicator();
-                              } else if (state is GetNewsError) {
-                                return ErrorIndicator(state.errorMessage);
-                              } else if (state is GetNewsSuccess) {
-                                newsSearch = state.news;
-                                if (newsSearch.isEmpty) {
-                                  return Center(
-                                    child: Text(
-                                      appLocalizations.noResult,
-                                      style: textTheme.titleLarge,
-                                    ),
-                                  );
-                                } else {
-                                  return ListView.separated(
-                                    padding: EdgeInsets.only(top: 16),
-                                    itemBuilder: (_, index) => InkWell(
-                                      onTap: () {
-                                        showBotomSheet(newsSearch[index]);
-                                      },
-                                      child: NewsItem(newsSearch[index]),
-                                    ),
-                                    separatorBuilder: (_, _) =>
-                                        SizedBox(height: 16),
-                                    itemCount: newsSearch.length,
-                                  );
-                                }
-                              } else {
-                                return SizedBox();
-                              }
-                            },
+                        : PagingListener<int, News>(
+                            controller: pagingController,
+                            builder: (context, state, fetchNextPage) =>
+                                PagedListView(
+                                  state: state,
+                                  fetchNextPage: fetchNextPage,
+                                  builderDelegate:
+                                      PagedChildBuilderDelegate<News>(
+                                        itemBuilder: (context, news, index) =>
+                                            Padding(
+                                              padding: EdgeInsets.all(16),
+                                              child: NewsItem(news: news),
+                                            ),
+                                      ),
+                                ),
                           ),
                   ),
                 ],
@@ -136,16 +142,8 @@ class _SearchScreenState extends State<SearchScreen> {
     );
   }
 
-  void showBotomSheet(News news) async {
-    await showModalBottomSheet(
-      context: context,
-      backgroundColor: Colors.transparent,
-      builder: (_) => CustomHomeBottomSheet(news),
-    );
-  }
-
   void onChangedInputFiled(String query) {
-    newsViewModel.getSearchNews(query);
+    pagingController.refresh();
     setState(() {});
   }
 

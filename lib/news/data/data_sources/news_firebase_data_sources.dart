@@ -3,15 +3,14 @@ import 'package:news/news/data/models/news.dart';
 
 class NewsFirebaseDataSources implements NewsDataSources {
   @override
-  Future<List<News>> getNews({required String sourceId, required int page, required int pageSize}) {
+  Future<List<News>> getNews({required String sourceId, required int page}) {
     // firebase logic
     throw UnimplementedError();
   }
 
   @override
-  Future<List<News>> getSerachNews(String query) {
+  Future<List<News>> getSerachNews({String query = '', required int page}) {
     // firebase logic
     throw UnimplementedError();
   }
-  
 }

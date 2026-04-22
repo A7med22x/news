@@ -9,8 +9,9 @@ class NewsViewModel extends Cubit<NewsState> {
   NewsViewModel(this.repostory) : super(NewsInitial());
 
   List<News> news = [];
+  List<News> searchNews = [];
 
-  Future<void> getNews(String sourceId, int page, int pageSize) async {
+  Future<void> getNews(String sourceId, int page) async {
     emit(GetNewsLoading());
     try {
       if (page == 1) {
@@ -18,7 +19,7 @@ class NewsViewModel extends Cubit<NewsState> {
         news.clear();
       }
 
-      final response = await repostory.getNews(sourceId, page, pageSize);
+      final response = await repostory.getNews(sourceId, page);
       news.addAll(response);
       emit(GetNewsSuccess(news));
     } catch (error) {
@@ -26,10 +27,15 @@ class NewsViewModel extends Cubit<NewsState> {
     }
   }
 
-  Future<void> getSearchNews(String query) async {
+  Future<void> getSearchNews(String query, {required int page}) async {
     emit(GetNewsLoading());
     try {
-      List<News> searchNews = await repostory.getSearchNews(query);
+      if (page == 1) {
+        emit(GetNewsLoading());
+        searchNews.clear();
+      }
+      final response = await repostory.getSearchNews(query, page: page);
+      searchNews.addAll(response);
       emit(GetNewsSuccess(searchNews));
     } catch (error) {
       emit(GetNewsError(error.toString()));

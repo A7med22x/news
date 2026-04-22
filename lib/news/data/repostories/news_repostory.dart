@@ -6,11 +6,14 @@ class NewsRepostory {
 
   NewsRepostory(this.dataSources);
 
-  Future<List<News>> getNews(String sourceId, int page, int pageSize) async {
-    return dataSources.getNews(sourceId: sourceId, page: page, pageSize: pageSize);
+  Future<List<News>> getNews(String sourceId, int page) async {
+    return dataSources.getNews(sourceId: sourceId, page: page);
   }
 
-  Future<List<News>> getSearchNews(String query) async {
-    return dataSources.getSerachNews(query);
+  Future<List<News>> getSearchNews(
+    String query, {
+    required int page,
+  }) async {
+    return dataSources.getSerachNews(query: query, page: page);
   }
 }

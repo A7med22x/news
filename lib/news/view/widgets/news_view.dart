@@ -9,7 +9,6 @@ import 'package:news/sourses/view/widgets/tab_item.dart';
 import 'package:news/shared/providers/settings_provider.dart';
 import 'package:news/sourses/view_model/sources_states.dart';
 import 'package:news/sourses/view_model/sources_view_model.dart';
-import 'package:news/shared/widgets/custom_home_bottom_sheet.dart';
 import 'package:news/shared/widgets/load_indicator.dart';
 import 'package:news/shared/widgets/error_indicator.dart';
 import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
@@ -17,9 +16,9 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:provider/provider.dart';
 
 class NewsView extends StatefulWidget {
-  String categoryId;
+  final String categoryId;
 
-  NewsView({required this.categoryId});
+  const NewsView({super.key, required this.categoryId});
 
   @override
   State<NewsView> createState() => _NewsViewState();
@@ -29,7 +28,6 @@ class _NewsViewState extends State<NewsView> {
   SourcesViewModel sourcesViewModel = ServiceLocator.sourcesViewModel;
   NewsViewModel newsViewModel = ServiceLocator.newsViewModel;
   int currentIndex = 0;
-  static const pageSize = 20;
   late PagingController<int, News> pagingController;
   List<Source> sources = [];
 
@@ -70,7 +68,6 @@ class _NewsViewState extends State<NewsView> {
                 await newsViewModel.getNews(
                   sources[currentIndex].id!,
                   pageKey,
-                  pageSize,
                 );
                 return newsViewModel.news;
               },
@@ -110,14 +107,9 @@ class _NewsViewState extends State<NewsView> {
                       state: state,
                       fetchNextPage: fetchNextPage,
                       builderDelegate: PagedChildBuilderDelegate<News>(
-                        itemBuilder: (context, news, index) => InkWell(
-                          onTap: () {
-                            showBotomSheet(news);
-                          },
-                          child: Padding(
-                            padding: EdgeInsets.all(16),
-                            child: NewsItem(news),
-                          ),
+                        itemBuilder: (context, news, index) => Padding(
+                          padding: EdgeInsets.all(16),
+                          child: NewsItem(news: news),
                         ),
                       ),
                     ),
@@ -130,14 +122,6 @@ class _NewsViewState extends State<NewsView> {
           }
         },
       ),
-    );
-  }
-
-  void showBotomSheet(News news) async {
-    await showModalBottomSheet(
-      context: context,
-      backgroundColor: Colors.transparent,
-      builder: (_) => CustomHomeBottomSheet(news),
     );
   }
 }

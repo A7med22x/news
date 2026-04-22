@@ -6,9 +6,9 @@ import 'package:news/shared/providers/settings_provider.dart';
 import 'package:provider/provider.dart';
 
 class HomeDrawer extends StatelessWidget {
-  VoidCallback onGoToHomeCliced;
+  final VoidCallback onGoToHomeCliced;
 
-  HomeDrawer({required this.onGoToHomeCliced});
+  const HomeDrawer({super.key, required this.onGoToHomeCliced});
 
   @override
   Widget build(BuildContext context) {

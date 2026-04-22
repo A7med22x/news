@@ -6,10 +6,10 @@ import 'package:news/shared/providers/settings_provider.dart';
 import 'package:provider/provider.dart';
 
 class CategoryItem extends StatelessWidget {
-  CategoryModel category;
-  int index;
+  final CategoryModel category;
+  final int index;
 
-  CategoryItem({required this.category, required this.index});
+  const CategoryItem({super.key, required this.category, required this.index});
 
   @override
   Widget build(BuildContext context) {

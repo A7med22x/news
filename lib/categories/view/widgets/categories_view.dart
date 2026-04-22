@@ -4,9 +4,9 @@ import 'package:news/l10n/app_localizations.dart';
 import 'package:news/categories/data/models/category_model.dart';
 
 class CategoriesView extends StatelessWidget {
-  void Function(CategoryModel) onCategorySelected;
+  final void Function(CategoryModel) onCategorySelected;
 
-  CategoriesView({required this.onCategorySelected});
+  const CategoriesView({super.key, required this.onCategorySelected});
   @override
   Widget build(BuildContext context) {
     AppLocalizations appLocalizations = AppLocalizations.of(context)!;
