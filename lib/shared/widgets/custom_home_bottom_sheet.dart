@@ -64,7 +64,7 @@ class CustomHomeBottomSheet extends StatelessWidget {
   Future<void> launchInBrowser(String url) async {
     final Uri uri = Uri.parse(url);
 
-    if (!await launchUrl(uri, mode: LaunchMode.externalApplication)) {
+    if (!await launchUrl(uri, mode: LaunchMode.inAppWebView)) {
       throw Exception('Could not launch $url');
     }
   }
